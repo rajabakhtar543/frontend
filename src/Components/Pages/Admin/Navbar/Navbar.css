@@ -1,0 +1,21 @@
+.dropdown-menu show{
+   
+  width: auto;
+  position: absolute;
+left: -11;
+ 
+}
+.sticky-left {
+    position: sticky;
+    top: 0;}
+    .buttoncolor{
+        background-color: transparent !;
+    }
+    .navbar2{
+        width: auto;
+        background-color: rgb(255, 255, 255)!important;
+    }
+    .navbtn{
+        background-color: #ff523b!important;
+      
+    }

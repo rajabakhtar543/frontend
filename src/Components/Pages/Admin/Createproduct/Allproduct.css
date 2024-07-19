@@ -1,0 +1,16 @@
+.product-link{
+text-decoration: none;
+color: white !important;
+
+}
+.product-image{
+    height: 70px !important;
+    width: 70px !important;
+}
+.img{
+    height: 50px !important;
+    width: 50px !important;
+    border:1px solid black !important;
+    border-radius: 50%;
+    
+}

@@ -1,0 +1,104 @@
+.cart-page{
+  margin: 80px auto;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart-info{
+  display: flex;
+  flex-wrap: wrap;
+}
+thead{
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background: #FF523b;
+  font-weight: normal;
+
+}
+td{
+  padding: 10px 5px;
+}
+td input{
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+}
+td img{
+  width: 100px;
+  height:100px ;
+  margin-right: 10px;
+}
+.information{
+  flex-direction: column;
+}
+.p{
+  margin: 0;
+}
+.btns{
+  text-decoration: none;
+  background-color: #ff523b;
+  display: inline-block;
+  color: white;
+  padding: 2px 2px;
+ 
+
+  cursor: pointer;
+}
+
+
+.summary-title {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.summary-content {
+
+  border: 1px solid #000000;
+  background-color: rgba(250, 131, 4, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.summary-label {
+  font-weight: bold;
+}
+
+.checkout-btn {
+  display: block;
+  float: right;
+  width: 50px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #0056b3;
+}
+p2{
+  font-size: 12px;
+}
+

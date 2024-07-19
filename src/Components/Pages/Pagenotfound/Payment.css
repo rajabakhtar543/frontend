@@ -1,0 +1,12 @@
+.pnf-title i{
+    border: 2px solid rgb(0, 0, 0);
+    padding: 50px;
+    border-radius: 50%;
+    background-color: greenyellow;
+    color: white;
+    margin-top: 50px;
+}
+.red{
+    background-color: red!important;
+    border: 2px solid rgb(0, 0, 0)!important;
+}

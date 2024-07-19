@@ -1,0 +1,67 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}.dashboard {
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding-bottom: 20px; /* Add some padding at the bottom for small screens */
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #ff523b;
+  --secondary-color: #2c3e50;
+  --background-color: #f4f7fa;
+  --text-color: #333;
+  --light-gray: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.dashboard {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}

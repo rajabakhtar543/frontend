@@ -122,7 +122,7 @@ function Register() {
                     </div>
                     <input className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Create password" type="password" required />
                   </div>
-                  <p style={{fontSize:"10px"}}>(*Your Order Will Be Shipped On this Address*)</p>
+                
                   <div className="form-group input-group mb-2 ">
                     <div className="input-group-prepend">
                       <span2 className="input-group-text"><i className="icon bi-house"></i></span2>

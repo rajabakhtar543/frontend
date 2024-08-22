@@ -30,6 +30,7 @@ import Paymentcancel from './Components/Pages/Pagenotfound/Paymentcancel';
 import Orders from './Components/Pages/User/Orders';
 import AdminOrders from './Components/Pages/Admin/Createproduct/AdminOrders';
 import SingleProduct from './Components/Pages/SingleProduct/SingleProduct';
+import Home from './Components/Pages/Admin/Home/Home';
 
 
 
@@ -46,7 +47,7 @@ function App() {
   <Route path='user/orders' element={<Orders/>}/>
   </Route>
   <Route path="/Dashboard" element={<AdminRoute/>}>
-  <Route path='admin' element={<AdminDashboard/>}/>
+  <Route path='admin' element={<Home/>}/>
   <Route path='admin/create-category' element={<Createcategory/>}/>
   <Route path='admin/create-product' element={<Createproduct/>}/>
   <Route path='admin/products' element={<AllProducts/>}/>

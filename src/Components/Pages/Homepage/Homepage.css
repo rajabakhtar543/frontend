@@ -156,8 +156,9 @@ padding: 10px 10px!important;
     padding: 30px 0;
 }
 .offer-img{
-    /* width: 400px !important; */
-    padding: 50px;
+  width: 400px;
+  height: 600px;
+  
 }
 .colum{
     flex-direction: column;

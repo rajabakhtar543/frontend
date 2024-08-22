@@ -161,13 +161,11 @@ const UpdateProduct = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3">
-          <Sidebar />
-        </div>
-        <div className="col-md-9">
-          <Navbar />
+    
+    <div className="home-container">
+    <Sidebar />
+    <div className="main-content">
+      <Navbar />
           <div><h3>Update Product</h3></div>
           <div className="m-1 w-75">
             <Form form={form} layout="vertical">
@@ -288,7 +286,7 @@ const UpdateProduct = () => {
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

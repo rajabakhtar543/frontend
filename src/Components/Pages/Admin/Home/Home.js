@@ -1,89 +1,89 @@
-import React from 'react'
-import'./Home.css'
+import React, { useState, useEffect } from 'react';
+import './Home.css';
+import Navbar from '../Navbar/Navbar';
+import Sidebar from '../Sidebar/Sidebar';
+import axios from 'axios';
+import SalesChart from './Saleschart';
 
- function Home() {
+function Home() {
+  const [total, setTotal] = useState(0);
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [totalRevenue, setTotalRevenue] = useState(0);
+
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/product-count");
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTotal();
+  }, []);
+
+  const getTotalOrders = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/order/order-count");
+      setTotalOrder(data?.totalOrder);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTotalOrders();
+  }, []);
+
+  const getTotalRevenue = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/order/total-revenue");
+      setTotalRevenue(data?.totalRevenue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTotalRevenue();
+  }, []);
+
   return (
     <>
-    <div className='px-3' m-5>
-   
-   
-        <div className="row g-3 my-2 col-md-12 w-100">
-            <div className="col-md-3">
-                <div className="p-3 bg mt-5 text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                    <h3 className='fs-2'>230</h3>
-                    <p className='fs-5'>Products</p>
-                    </div>
-                    <i className='bi bi-cart-plus p-3 h1'> </i>
-                </div>
+      <div className="home-container">
+        <Sidebar />
+        <div className="main-content">
+          <Navbar />
+          <div className="dashboard-cards mt-5">
+            <div className="card">
+              <div className="card-content">
+                <span className='fs-3'>{total}</span>
+                <p>Total Products</p>
+              </div>
+              <i className="bi bi-cart-plus"></i>
             </div>
-            <div className="col-md-3">
-                <div className="p-3 bg mt-5 text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                    <h3 className='fs-2 text-white'>2425</h3>
-                    <p className='fs-5'>Total Revenu</p>
-                    </div>
-                    <i className='bi bi-cash p-3 h1'> </i>
-                </div>
+            <div className="card">
+              <div className="card-content">
+                <span className='fs-3'>${totalRevenue}</span>
+                <p>Total Revenue</p>
+              </div>
+              <i className="bi bi-cash"></i>
             </div>
-            <div className="col-md-3">
-                <div className="p-3 bg mt-5 text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                    <h3 className='fs-2'>80</h3>
-                    <p className='fs-5'>Orders</p>
-                    </div>
-                    <i className='bi bi-box p-3 h1'> </i>
-                </div>
+            <div className="card">
+              <div className="card-content">
+                <span className='fs-3'>{totalOrder}</span>
+                <p>Total Orders</p>
+              </div>
+              <i className="bi bi-box"></i>
             </div>
-            <div className="col-md-3">
-                <div className="p-3 bg mt-5 text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                    <h3 className='fs-2'>15%</h3>
-                    <p className='fs-5'>Sales rate this month</p>
-                    </div>
-                    <i className='bi bi-arrow-up p-3 h1'> </i>
-                </div>
-            </div>
-          
+          </div>
+          <h2 className='sales-overview'>Sales Overview</h2>
+          <SalesChart />
         </div>
-      
-    </div>
-    <div className='mt-5 text-white'>
-      <h1>Latest Orders</h1>
-    </div>
-    <table class="table mt-5">
-   
-    <thead>
-      <tr className='text-white'>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr className='text-white'>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr className='text-white'>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr className='text-white'>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-  </>
-
-  )
+      </div>
+    </>
+  );
 }
+
 export default Home;

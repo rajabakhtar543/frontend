@@ -119,13 +119,11 @@ const Createproduct = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3">
-          <Sidebar />
-        </div>
-        <div className="col-md-9">
-          <Navbar />
+   
+    <div className="home-container">
+    <Sidebar />
+    <div className="main-content">
+      <Navbar />
           <div>
             <h1>Create Product</h1>
           </div>
@@ -246,7 +244,7 @@ const Createproduct = () => {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 };
 

@@ -69,6 +69,7 @@ nav ul{
     width: 100%;
     overflow: hidden;
     transition: 0.3s;
+    z-index: 1000;
   }
   .list{
     display: block;

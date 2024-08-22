@@ -6,7 +6,7 @@ import Navbar from './Navbar/Navbar'
 
 const AdminDashboard = () => {
   return (
-    <div className="container-fluid">
+ 
     <div className="row">
       <div className="col-md-3">
        <Sidebar/>
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
 
       </div>
     </div>
-  </div>
+
    
   )
 }

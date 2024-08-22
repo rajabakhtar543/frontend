@@ -45,13 +45,11 @@ const AdminOrders = () => {
   };
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            <Sidebar className="sticky-left" />
-          </div>
-          <div className="col-md-9">
-            <Navbar />
+     
+     <div className="home-container">
+        <Sidebar />
+        <div className="main-content">
+          <Navbar />
             <h1 className="text-center mb-4">All Orders</h1>
             {orders?.map((o, i) => (
               <Card key={o._id} className="mb-4 shadow-sm">
@@ -64,6 +62,7 @@ const AdminOrders = () => {
                       <th scope="col">Date</th>
                       <th scope="col">Payment</th>
                       <th scope="col">Quantity</th>
+                      <th scope="col">SubTotal</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,6 +89,7 @@ const AdminOrders = () => {
                       <td>{new Date(o?.createdAt).toLocaleDateString()}</td>
                       <td>{o?.payment ? "Success" : "Failed"}</td>
                       <td>{o?.products?.length}</td>
+                      <td>${o?.total}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -126,7 +126,7 @@ const AdminOrders = () => {
             ))}
           </div>
         </div>
-      </div>
+  
     </>
   );
 };

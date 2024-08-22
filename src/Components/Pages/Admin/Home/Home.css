@@ -1,10 +1,83 @@
-.h1{
-    font-size: 55px;
+/* General reset and box-sizing */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.bg{
-    background-color: rgb(42, 42, 42);
-  
+
+/* Background color for the page */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
 }
-.bg:hover{
-    transform: scale(1.03);
+
+/* Container for home page */
+.home-container {
+  display: flex;
+}
+
+/* Sidebar and Navbar styling */
+.sidebar, .navbar {
+  background-color: #343a40;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Dashboard cards styling */
+.dashboard-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #343a40;
+  color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-content {
+display: flex;
+align-items: center;
+flex-direction: column;
+}
+
+.card i {
+  font-size: 2rem;
+  color: #ffc107;
+}
+
+/* Chart section styling */
+.sales-overview {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .card {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .card i {
+      margin-top: 10px;
+      font-size: 1.5rem;
+  }
 }

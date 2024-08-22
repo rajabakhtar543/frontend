@@ -1,71 +1,203 @@
-#product-1{
-    text-align: center;
+.icon-control {
+  margin-top: 5px;
+  float: right;
+  font-size: 80%;
 }
-#product-1 .pro-container{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-    flex-wrap: wrap;
+
+.list-menu a {
+  color: #343a40;
 }
-.pro{
-    margin: 6px;
+
+.list-menu {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 }
-#product-1 .pro{
-    width:20% ;
-    min-width:250px ;
-    padding:10px 12px ;
-    margin: 5px;
-    border: 1px solid #cce7d0;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 20px 20px 30px rgba(0, 0, 0,0.02);
-    margin: 15px 0;
-    transition: 0.2s ease;
-    position: relative;
+
+.container-fluid {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
-#product-1 .pro:hover{
-    box-shadow: 20px 20px 30px rgba(0, 0, 0,0.06);
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
-#product-1 .pro img{
-    width: 90%;
-    border-radius:20px ;
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-#product-1 .pro .des{
-text-align: start;
-padding: 10px 0;
+
+.ant-card-cover img {
+  transition: transform 0.3s ease;
 }
-#product-1 .pro .des span{
-    color: #606063;
-    font-size: 12px;
+
+.ant-card:hover .ant-card-cover img {
+  transform: scale(1.05);
 }
-#product-1 .pro .des h5{
-    padding-top: 7px;
-    color: #1a1a1a;
-    font-size: 14px;
+
+.ant-card-meta-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
-#product-1 .pro .des i{
-    font-size: 12px;
-    color: rgb(243, 181, 25);
+
+.ant-card-meta-description {
+  color: #666;
 }
-#product-1 .pro .des h4{
-    padding-top: 7px;
-    font-size: 20px;
-    font-weight: 700;
-    color: #088178;
+
+.pagination {
+  margin-top: 2rem;
 }
-#product-1 .pro .cart{
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50px;
-    background-color:#e8f6ea ;
-    font-weight: 500;
-    color: #088178;
-    border: 1px solid #cce7d0;
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
+
+.page-link {
+  color: #1890ff;
 }
-.search{
-    width: 30px;
+
+.page-item.active .page-link {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  margin-bottom: 1rem;
+}
+
+.filter-content .card-body {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.custom-control {
+  margin-bottom: 0.5rem;
+}
+
+.custom-control .ant-checkbox-wrapper {
+  display: flex;
+
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-control:hover .ant-checkbox-wrapper {
+  background-color: #e6f7ff;
+}
+
+.custom-control .ant-checkbox-wrapper span {
+  font-weight: 500;
+}
+
+.product-count {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.container-fluid {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.product-container {
+  min-height: calc(100vh - 300px);
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex-grow: 1;
+}
+
+.img-wrapper {
+  height: 300px;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-left: 0;
+}
+
+.pagination-container {
+  margin-top: auto;
+  margin-bottom: 2rem;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-card-body {
+  flex-grow: 1;
+}
+
+.ant-card-meta-description {
+  height: auto;
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    min-height: calc(100vh - 200px);
+  }
+  .pagination-container {
+    margin-bottom: 1rem;
+  }
+}
+
+.size-selector,
+.color-selector {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.size-card,
+.color-card {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size-card.selected,
+.color-card.selected {
+  border-color: #1890ff;
+  background-color: #e6f7ff;
+}
+
+.size-card:hover,
+.color-card:hover {
+  border-color: #1890ff;
+}
+
+.color-card {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+}
+span3{
+  background-color: rgb(234, 177, 111) ;
+  color: #000000;
+  padding: 2px 15px;
+  border-radius: 10px;
+ 
 }

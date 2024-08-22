@@ -27,13 +27,11 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3">
-          <Sidebar className="stcky-left" />
-        </div>
-        <div className="col-md-9">
-          <Navbar />
+  
+    <div className="home-container">
+    <Sidebar />
+    <div className="main-content">
+      <Navbar />
           <h1>All Products</h1>
           <div className="table-responsive">
             <table className="table table-bordered">
@@ -77,7 +75,7 @@ const AllProducts = () => {
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 };
 

@@ -65,6 +65,9 @@ const[address,Setaddress]=useState('')
       console.log(error);
     }
   };
+  const totalrevenue = cart.reduce((total, item) => {
+    return total + (item.Discountedprice * (item.quantity || 1));
+}, 0);
 
 
   const makePayment = async () => {
@@ -78,11 +81,13 @@ const[address,Setaddress]=useState('')
             name: item.name,
             Discountedprice: item.Discountedprice,
             photos: item.photos,
+           
             quantity: item.quantity || 1,
             selectedColor: item.selectedColor,
             selectedSize: item.selectedSize,
         })),
         user: Auth.user,
+        totalrevenue,
     };
 
     try {

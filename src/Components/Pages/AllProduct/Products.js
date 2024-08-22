@@ -1,35 +1,28 @@
-
-import Layout from '../../Layout/Layout'
+import Layout from '../../Layout/Layout';
 import React, { useState, useEffect } from "react";
-
-
 import axios from "axios";
-import { Checkbox, Radio } from "antd";
-
-
-
+import { Checkbox, Spin, Card } from "antd";
 import { useAuth } from '../../../Context/auth';
-import { Price } from '../Price';
-import "./Products.css"
-import SearchForm from '../../Form/SearchForm';
-import { useCart } from '../../../Context/cart';
+import "./Products.css";
+
 import toast from 'react-hot-toast';
 import { NavLink } from 'react-router-dom';
-
+import {  StarFilled } from '@ant-design/icons';
+import SearchForm from '../../Form/SearchForm';
+const { Meta } = Card;
 
 const Products = () => {
-  
- const [cart ,setCart] = useCart([]);
-  const[Auth,setAuth]= useAuth();
+ 
+  const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
-  const [radio, setRadio] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  //get all cat
+  // Get all categories
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/all-category");
@@ -38,7 +31,6 @@ const Products = () => {
       }
     } catch (error) {
       console.log(error);
-    
     }
   };
 
@@ -46,32 +38,20 @@ const Products = () => {
     getAllCategory();
     getTotal();
   }, []);
-  //get products
+
+  // Get all products
   const getAllProducts = async () => {
     try {
       setLoading(true);
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
-      setProducts(data.products);
+      // If page is 1, replace the products; otherwise, append them
+      setProducts(page === 1 ? data.products : [...products, ...data.products]);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
-  useEffect(() => {
-    getAllProducts();
-  }, []);
-
-  //getTOtal COunt
-  const getTotal = async () => {
-    try {
-      const { data } = await axios.get("/api/v1/product/product-count");
-      setTotal(data?.total);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     if (page === 1) return;
     loadMore();
@@ -89,7 +69,21 @@ const Products = () => {
     }
   };
 
-  // filter by cat
+  useEffect(() => {
+    getAllProducts();
+  }, [page]);
+
+  // Get total count
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/product-count");
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Handle filter by category
   const handleFilter = (value, id) => {
     let all = [...checked];
     if (value) {
@@ -99,84 +93,156 @@ const Products = () => {
     }
     setChecked(all);
   };
-  useEffect(() => {
-    if (!checked.length || !radio.length) getAllProducts();
-  }, [checked.length, radio.length]);
 
   useEffect(() => {
-    if (checked.length || radio.length) filterProduct();
-  }, [checked, radio]);
+    if (!checked.length && !searchTerm) {
+      getAllProducts();
+    } else {
+      filterProduct();
+    }
+  }, [checked, searchTerm]);
 
-  //get filterd product
+  // Get filtered products
   const filterProduct = async () => {
     try {
+      // Clear the products array first
+      setLoading(true);
       const { data } = await axios.post("/api/v1/product/product-filters", {
         checked,
-        radio,
       });
+      setLoading(false);
       setProducts(data?.products);
+      // Update categories with counts
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
+  const filtercatcount = async () => {
+    try {
+      setLoading(true);  // Start the loading state
+  
+      // Fetch category counts from the API
+      const { data } = await axios.post("/api/v1/product/category-count");
+  
+      if (data?.categoryCounts && Array.isArray(data.categoryCounts)) {
+        setCategories(data.categoryCounts); // Update the categories with counts
+      } else {
+        console.error("Unexpected response structure:", data);
+        toast.error("Failed to load category counts.");
+      }
+      
+    } catch (error) {
+      setLoading(false);
+      console.error("Error fetching category counts:", error);
+      toast.error("Error fetching category counts.");
+    } finally {
+      setLoading(false);  // End the loading state
+    }
+  };
+  
+  // Ensure this useEffect is only run once when the component mounts
+  useEffect(() => {
+    filtercatcount();
+  }, [products]);
 
+  // Handle search
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Render category checkbox with count
+  const renderCategoryCheckboxes = () => {
+    return categories.map((category) => (
+      <div key={category._id} className="custom-control custom-checkbox">
+        <Checkbox
+          onChange={(e) => handleFilter(e.target.checked, category._id)}
+          checked={checked.includes(category._id)}
+        >
+          {category.name} <span3>{category.count || 0}</span3>
+        </Checkbox>
+      </div>
+    ));
+  };
 
   return (
-   <>
-   <Layout>
-    <div className="containers">
-   <div className="container-fluid row mt-3">
-       
-        <div className="col-md-12">
-          
-          <SearchForm className='search'/>
-          <div className="d-flex flex-wrap pro-container" id='product-1'>
-          <div className="small-container">
-<section id="product-1" className="section-p1">
-    <h2 className='titles'>All Products</h2>
-   
-    <div className="pro-container ">
-    {products.map(p => (
-              <div className="pro" key={p._id}>
-                {p.photos.length > 0 && (
-                  <img
-                    src={p.photos[0]}
-                    alt={p.name}
-                    style={{ height: "250px", width: "248px" }}
-                  />
-                )}
-                <div className="des">
-                  <NavLink to={`/product/${p.slug}`} className="navlink">
-                    <h5 className="h-4">
-                      {p.name.length > 50 ? `${p.name.substring(0, 50)}....` : p.name}
-                    </h5>
-                  </NavLink>
-                  <NavLink to={`/product/${p.slug}`} className="navlink">
-                    <span>
-                      {p.description && p.description.length > 60
-                        ? `${p.description.substring(0, 60)}....`
-                        : p.description}
-                    </span>
-                  </NavLink>
-                  <div className="star">
-                    <i className="bi bi-star-fill" />
-                    <i className="bi bi-star-fill" />
-                    <i className="bi bi-star-fill" />
-                    <i className="bi bi-star-fill" />
-                    <i className="bi bi-star-fill" />
+    <Layout>
+      <div className="container-fluid">
+        <div className="row">
+          <aside className="col-lg-3 col-md-4">
+            <div className="card mb-4">
+              <article className="filter-group">
+                <header className="card-header">
+                  <h6 className="title">Categories</h6>
+                </header>
+                <div className="filter-content">
+                  <div className="card-body">
+                    {renderCategoryCheckboxes()}
                   </div>
-                  
-                  <h4>${p.Discountedprice}</h4>
-                  <p3>${p.Orignalprice}</p3>
                 </div>
-               
-              </div>
-            ))}
-   </div>
-  </section>
-</div>
+              </article>
+            </div>
+          </aside>
+          <main className="col-lg-9 col-md-8">
+  <header className="border-bottom mb-4 pb-3">
+    <div className="form-inline">
+    <SearchForm />
+    </div>
+    <div className="product-count">
+      Total Products: {total}
+    </div>
+  </header>
+
+  <div className="product-container">
+    {loading ? (
+      <div className="text-center py-5">
+        <Spin size="large" />
+      </div>
+    ) : (
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {products.map(p => (
+          <div className="col mb-4" key={p._id}>
+            <Card
+              hoverable
+              cover={
+                <div className="img-wrapper">
+                  <img
+                    alt={p.name}
+                    src={p.photos && p.photos.length > 0 ? p.photos[0] : 'https://via.placeholder.com/300'}
+                  />
+                </div>
+              }
+              actions={[
+                <NavLink to={`/product/${p.slug}`} key="view">View</NavLink>
+              ]}
+            >
+              <Meta
+                title={p.name.length > 20 ? `${p.name.substring(0, 20)}...` : p.name}
+                description={
+                  <>
+                    <p>{p.description && p.description.length > 25
+                      ? `${p.description.substring(0, 25)}...`
+                      : p.description}</p>
+                    <div>
+                      {[...Array(5)].map((_, index) => (
+                        <StarFilled key={index} style={{ color: '#fadb14' }} />
+                      ))}
+                    </div>
+                    <div className="mt-2">
+                      <span className="text-muted mr-2 m-2"><del>${p.Orignalprice}</del></span>
+                      <span className="font-weight-bold">${p.Discountedprice}</span>
+                    </div>
+                  </>
+                }
+              />
+            </Card>
           </div>
-          <div className="m-2 p-3">
+        ))}
+      </div>
+    )}
+  </div>
+
+    <div className="m-2 p-3">
             {products && products.length < total && (
               <button
                 className="btn btn-warning"
@@ -189,12 +255,11 @@ const Products = () => {
               </button>
             )}
           </div>
+</main>
         </div>
       </div>
-      </div>
-   </Layout>
-   </>
+    </Layout>
   );
-};
+}
 
-export default Products
+export default Products;
